@@ -1,0 +1,10 @@
+.banner {
+    display: flex;
+    justify-content: center;
+    padding: 7%;
+    align-items: center;
+
+    @media (max-width: 1200px) {
+        padding: 8%;
+    }
+}

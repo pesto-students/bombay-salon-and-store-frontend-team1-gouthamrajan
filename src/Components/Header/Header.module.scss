@@ -1,0 +1,7 @@
+.menu_icon_container {
+    visibility: hidden;
+
+    @media (max-width) {
+        visibility: visible;
+    }
+}
