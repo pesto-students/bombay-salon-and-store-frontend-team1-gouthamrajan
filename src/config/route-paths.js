@@ -1,6 +1,7 @@
 const routePaths = {
-    index: '/',
-    resetPassword: 'recover-password/:token'
-}
+  index: "/",
+  resetPassword: "recover-password/:token",
+  orderPlaced: "order-placed/:id",
+};
 
-export default routePaths
+export default routePaths;

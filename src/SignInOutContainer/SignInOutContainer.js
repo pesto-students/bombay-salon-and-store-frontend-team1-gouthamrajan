@@ -3,7 +3,7 @@ import { Paper, Tabs, Tab, Typography, Box } from "@mui/material";
 import Login from "../Components/Login/Login";
 import SignUp from "../Components/SignUp/SignUp";
 
-const SignInOutContainer = () => {
+const SignInOutContainer = (props) => {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -29,6 +29,7 @@ const SignInOutContainer = () => {
       </div>
     );
   }
+
   return (
     <Paper elevation={20} style={paperStyle}>
       <Tabs
@@ -43,10 +44,17 @@ const SignInOutContainer = () => {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <Login handleChange={handleChange} />
+        <Login
+          setIsLoggedIn={props.setIsLoggedIn}
+          handleChange={handleChange}
+          setShowAuth={props.setShowAuth}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <SignUp />
+        <SignUp
+          setIsLoggedIn={props.setIsLoggedIn}
+          setShowAuth={props.setShowAuth}
+        />
       </TabPanel>
     </Paper>
   );

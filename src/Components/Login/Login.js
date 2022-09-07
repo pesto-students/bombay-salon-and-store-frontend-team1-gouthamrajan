@@ -15,15 +15,16 @@ import ContentCutIcon from "@mui/icons-material/ContentCut";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "../../config/axiosConfig";
+import { toast } from "react-toastify";
 
-function Login({ handleChange }) {
+function Login(props) {
   // const login = useSelector((state) => state.postLogin);
   // const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const paperStyle = {
     padding: 20,
-    height: "55vh",
     width: 300,
     margin: "0 auto",
   };
@@ -38,11 +39,27 @@ function Login({ handleChange }) {
     email: Yup.string().email("Please enter valid email").required("Required"),
     password: Yup.string().required("Required"),
   });
-  const onSubmit = (values, props) => {
+
+  const onSubmit = (values, fprops) => {
     console.log(values);
     // dispatch(postLogin(values));
-    props.setSubmitting(false);
-    console.log(props);
+    fprops.setSubmitting(false);
+
+    axios
+      .post("/app/user/login", {
+        email: values.email,
+        password: values.password,
+      })
+      .then((response) => {
+        console.log(response.data);
+        localStorage.setItem("userToken", response.data.token);
+        props.setIsLoggedIn(true);
+        props.setShowAuth(false);
+        toast.success("Logged In");
+      })
+      .catch((err) => {
+        toast.error(err.response);
+      });
   };
   // useEffect(() => {
   //   if (login.isLogedIn) {

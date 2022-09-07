@@ -1,1 +1,1 @@
-export const baseUrl = "https://pacific-mesa-99952.herokuapp.com/";
+export const baseUrl = "https://tbss-be.herokuapp.com";

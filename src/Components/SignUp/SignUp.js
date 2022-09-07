@@ -11,8 +11,10 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios from "../../config/axiosConfig";
+import { toast } from "react-toastify";
 
-const SignUp = () => {
+const SignUp = (props) => {
   const paperStyle = { padding: "20px", width: 300, margin: "0 auto" };
   // const login = useSelector((state) => state.postLogin);
   // const dispatch = useDispatch();
@@ -41,11 +43,29 @@ const SignUp = () => {
     ),
   });
 
-  const onSubmit = (values, props) => {
+  const onSubmit = async (values, fprops) => {
     console.log(values);
     // dispatch(postSignup(values));
-    props.resetForm();
-    props.setSubmitting(false);
+    fprops.resetForm();
+    fprops.setSubmitting(false);
+
+    try {
+      let response = await axios.post("/app/user/register", {
+        name: values.name,
+        gender: values.gender,
+        mobile: values.phone,
+        email: values.email,
+        password: values.password,
+        confirm_password: values.confirmPassword,
+      });
+      console.log("test", props);
+      props.setShowAuth(false);
+      props.setIsLoggedIn(true);
+      toast.success("Successfully Signed Up");
+      localStorage.setItem("userToken", response.data.token);
+    } catch (error) {
+      toast.error(error.response);
+    }
   };
   return (
     <Grid>
