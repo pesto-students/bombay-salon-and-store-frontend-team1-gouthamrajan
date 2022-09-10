@@ -41,7 +41,7 @@ function loadScript(src) {
   });
 }
 
-export default function CartAkash(props) {
+export default function Cartmain(props) {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
