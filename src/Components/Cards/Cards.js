@@ -15,7 +15,7 @@ const Cards = () => {
   return (
     <div className={styles.card_container}>
       <div className={styles.card_section}>
-        {services.slice(0, 4).map((data) => (
+        {services.map((data) => (
           <CardItem
             width="24%"
             height="150px"

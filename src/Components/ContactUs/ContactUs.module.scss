@@ -1,0 +1,48 @@
+.contactus {
+    width: 100%;
+    display: flex;
+    padding-top: 130px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.contactusform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formsection {
+    margin-top: 20px;
+    width: 110%;
+}
+
+.formtwosection {
+    display: flex;
+    justify-content: space-between;
+    width: 110%;
+    margin-top: 20px;
+
+    @media all and (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.responsesavedcontainer {
+    margin-top: 30px;
+    font-size: 25px;
+    font-family: "Raleway";
+    font-weight: 700;
+}
+
+.address {
+    text-align: center;
+    padding-top: 130px;
+}
+
+.submitbtn {
+    margin-top: 20px;
+}

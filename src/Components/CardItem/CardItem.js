@@ -5,56 +5,73 @@ import { toast } from "react-toastify";
 import axios from "../../config/axiosConfig";
 
 const CardItem = (props) => {
-  const { setShowAuth, isLoggedIn, setIsCartOpen } = useOutletContext();
+  const { setShowAuth, isLoggedIn, setIsCartOpen, fetchCart } = useOutletContext();
 
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "flex-start",
         minWidth: props.width,
-        height: props.height,
-        backgroundImage: `url(${props.src})`,
-        margin: "16px 0 16px 0",
-        backgroundSize: "cover",
-        borderRadius: "6px",
+        boxShadow: '0 0 10px lightgrey',
+        borderRadius: '4px'
       }}
     >
-      <Button
-        variant="contained"
+      <div
         style={{
-          backgroundColor: "black",
-          color: "white",
-        }}
-        onClick={() => {
-          if (!isLoggedIn) {
-            setShowAuth(true);
-          } else {
-            setIsCartOpen(true);
-            axios
-              .post("/app/cart", {
-                operation: "ADD_TO_CART",
-                product_id: props.productId,
-              })
-              .then((response) => {
-                toast.success("Added to cart");
-              });
-          }
-
-          // let cart = localStorage.getItem("cart")
-          //   ? JSON.parse(localStorage.getItem("cart"))
-          //   : [];
-
-          // cart.push({
-          //   productId: props.productId,
-          //   src: props.src,
-          //   name: props.label,
-          // });
-          // localStorage.setItem("cart", JSON.stringify(cart));
+          display: "flex",
+          alignItems: "flex-start",
+          height: props.height,
+          backgroundImage: `url(${props.src})`,
+          margin: "0px 0 5px 0",
+          backgroundSize: "cover",
+          borderRadius: "6px",
         }}
       >
-        Add to cart
-      </Button>
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: "black",
+            color: "white",
+          }}
+          onClick={() => {
+            if (!isLoggedIn) {
+              setShowAuth(true);
+            } else {
+
+              axios
+                .post("/app/cart", {
+                  operation: "ADD_TO_CART",
+                  product_id: props.productId,
+                })
+                .then((response) => {
+                  fetchCart()
+                  setIsCartOpen(true);
+                  toast.success("Added to cart");
+                });
+            }
+
+            // let cart = localStorage.getItem("cart")
+            //   ? JSON.parse(localStorage.getItem("cart"))
+            //   : [];
+
+            // cart.push({
+            //   productId: props.productId,
+            //   src: props.src,
+            //   name: props.label,
+            // });
+            // localStorage.setItem("cart", JSON.stringify(cart));
+          }}
+        >
+          Add to cart
+        </Button>
+      </div>
+
+      <div
+        style={{
+          fontWeight: 700
+        }}
+      >
+        {props.label}
+      </div>
     </div>
   );
 };

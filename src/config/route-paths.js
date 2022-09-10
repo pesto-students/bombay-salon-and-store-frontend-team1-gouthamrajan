@@ -1,7 +1,9 @@
 const routePaths = {
   index: "/",
+  myOrders: "my-orders",
+  contactUs: "contact-us",
   resetPassword: "recover-password/:token",
-  orderPlaced: "order-placed/:id",
+  orderPlaced: "order-placed/:type/:id",
 };
 
 export default routePaths;

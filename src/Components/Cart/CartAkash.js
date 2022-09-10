@@ -12,6 +12,10 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  InputLabel,
+  Select,
+  MenuItem,
+  TextField,
 } from "@mui/material";
 import React, { useEffect } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -21,6 +25,7 @@ import { useNavigate } from "react-router-dom";
 import { Close, DeleteForever } from "@mui/icons-material";
 import axios from "../../config/axiosConfig";
 import { toast } from "react-toastify";
+import { format } from "date-fns";
 
 function loadScript(src) {
   return new Promise((resolve) => {
@@ -41,20 +46,38 @@ export default function CartAkash(props) {
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [paymentType, setPaymentType] = useState("prepaid");
+  const [cartType, setCartType] = useState("");
+  const [stylistId, setStylistId] = useState("");
+  const [stylist, setStylist] = useState([]);
+  const [scheduleTime, setScheduleTime] = useState(new Date());
+
+  const handleChange = (event) => {
+    setStylistId(event.target.value);
+  };
 
   const fetchCart = () => {
     setIsLoading(true);
     axios.get("/app/cart").then((response) => {
       setIsLoading(false);
       setCartItems(response.data.cart.products);
+      setCartType(response.data.cart.products[0].details.type);
+    });
+  };
+
+  const fetchStylist = () => {
+    setIsLoading(true);
+    axios.get("/app/booking/stylists").then((response) => {
+      setStylist(response.data.stylists);
     });
   };
 
   useEffect(() => {
     fetchCart();
-  }, []);
+    fetchStylist();
+  }, [props.isCartOpen]);
 
   const handlePayment = async () => {
+    console.log("test");
     const result = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -62,24 +85,34 @@ export default function CartAkash(props) {
       alert("Something went wrong. Please contact admin");
       return;
     }
+    let data = {};
 
+    if (cartType == "product") {
+      data["product_id"] = cartItems[0].id;
+    } else {
+      data["service_provider"] = stylistId;
+      data["service_id"] = cartItems[0].id;
+      data["date"] = format(new Date(scheduleTime), "yyyy-MM-dd");
+      data["time_slot"] = format(new Date(scheduleTime), "HH:mm a");
+    }
+    console.log(data);
     axios
-      .post("/app/order/create", {
-        product_id: cartItems[0].id,
-      })
+      .post(`/app/${cartType == "product" ? "order" : "booking"}/create`, data)
       .then((result) => {
         const options = {
           key: "rzp_test_niMBCI16HQQN1F",
           currency: "INR",
-          amount: (
-            cartItems.reduce(
-              (partialSum, a) => partialSum + parseInt(a.details.price),
-              0
-            ) * 100
-          ).toString(),
-          order_id: result.data.id,
-          name: "The Gifttown",
-          image: "/images/gifttown.png",
+          amount: result.data._order.amount.toString(),
+          order_id: result.data._order.id,
+          // amount: (
+          //   cartItems.reduce(
+          //     (partialSum, a) => partialSum + parseInt(a.details.price),
+          //     0
+          //   ) * 100
+          // ).toString(),
+          // order_id: result.data.id,
+          name: "TBSS",
+          image: "/images/tbss.png",
           // notes: {
           //   email: profile.data.email,
           //   index: index,
@@ -91,8 +124,8 @@ export default function CartAkash(props) {
           //   email: profile.data.email,
           // },
           handler: (response) => {
-            navigate(`/order-placed/${result.data.id}`);
-            // dispatch(postOrderProduct(index, paymentType, promo))
+            props.setIsCartOpen(false)
+            navigate(`/order-placed/${cartType}/${result.data.order.id}`);
           },
         };
 
@@ -118,6 +151,9 @@ export default function CartAkash(props) {
       <Box
         sx={{
           height: "100%",
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column'
         }}
       >
         <div
@@ -125,6 +161,7 @@ export default function CartAkash(props) {
             display: "flex",
             justifyContent: "center",
             position: "relative",
+            width: '100%'
           }}
         >
           <IconButton
@@ -220,6 +257,7 @@ export default function CartAkash(props) {
                         })
                         .then((response) => {
                           fetchCart();
+                          props.fetchCart();
                           toast.success("Removed from cart");
                         });
                     }}
@@ -249,11 +287,53 @@ export default function CartAkash(props) {
           })}
         </div>
 
+        {cartType == 'service' && (
+          <>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel id="demo-simple-select-standard-label">
+                Stylist
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={stylistId}
+                onChange={handleChange}
+                label="Stylist"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {stylist.map((data) => (
+                  <MenuItem value={data.id}>{data.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <div
+              style={{
+                marginTop: "20px",
+              }}
+            >
+              <TextField
+                id="datetime-local"
+                type="datetime-local"
+                sx={{ width: 250 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={scheduleTime}
+                onChange={(event) => setScheduleTime(event.target.value)}
+              />
+            </div>
+
+          </>
+        )}
+
         <div
           style={{
             width: "100%",
             maxWidth: "300px",
-            margin: "10px auto",
+            margin: "20px auto",
             display: "flex",
             justifyContent: "space-between",
           }}
@@ -277,13 +357,6 @@ export default function CartAkash(props) {
         <div>
           <Button variant="contained" onClick={() => handlePayment()}>
             Checkout
-          </Button>
-
-          <Button
-            variant="contained"
-            onClick={() => props.setIsCartOpen(false)}
-          >
-            Continue shopping
           </Button>
         </div>
 

@@ -17,7 +17,7 @@ const Product = () => {
       <div className={styles.card_section}>
         {products.slice(0, 4).map((data) => (
           <CardItem
-            width="48%"
+            width="24%"
             height="150px"
             src={data.image_url}
             productId={data.id}

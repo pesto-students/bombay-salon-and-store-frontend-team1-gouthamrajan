@@ -10,6 +10,19 @@ const Layout = () => {
   const [showAuth, setShowAuth] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cartCount, setCartCount] = useState(0)
+
+  const fetchCart = () => {
+    axios.get("/app/cart").then((response) => {
+      setCartCount(response.data.cart.products.length);
+    });
+  };
+
+  useEffect(() => {
+    fetchCart()
+  }, [])
+
+
 
   useEffect(() => {
     axios
@@ -23,6 +36,15 @@ const Layout = () => {
       });
   }, []);
 
+  useEffect(() => {
+    
+  axios.get('/app/booking')
+  .then((response)=>{
+    console.log(response)
+  })
+  }, [])
+  
+
   return (
     <>
       <Header
@@ -31,6 +53,8 @@ const Layout = () => {
         showAuth={showAuth}
         setShowAuth={setShowAuth}
         isLoggedIn={isLoggedIn}
+        cartCount={cartCount}
+        fetchCart={fetchCart}
       />
 
       <Dialog
@@ -59,6 +83,8 @@ const Layout = () => {
           setShowAuth,
           isLoggedIn,
           setIsCartOpen,
+          fetchCart,
+          cartCount
         }}
       />
       <Footer />

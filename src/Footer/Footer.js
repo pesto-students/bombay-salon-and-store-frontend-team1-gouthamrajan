@@ -9,6 +9,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import React from "react";
 import styles from './Footer.module.scss'
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -52,6 +53,10 @@ export default function Footer() {
             >
               ABOUT US
             </Button>
+
+            <Link
+            to="contact-us"
+            >
             <Button
               style={{
                 backgroundColor: 'white',
@@ -61,6 +66,8 @@ export default function Footer() {
             >
               CONTACT US
             </Button>
+            </Link>
+
             <Button
               style={{
                 backgroundColor: 'white',
