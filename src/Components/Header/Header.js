@@ -4,10 +4,10 @@ import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useOutletContext } from "react-router-dom";
-import Logo from "../../assets/image/tbss.PNG";
+import Logo from "../../assets/image/tbss.png";
 import PersonIcon from "@mui/icons-material/Person";
 import CartAkash from "../Cart/CartAkash";
-import axios from '../../config/axiosConfig';
+import axios from "../../config/axiosConfig";
 
 export default function Header(props) {
   const links = [
@@ -27,7 +27,6 @@ export default function Header(props) {
   const [isDrawwerOpen, setisDrawwerOpen] = useState(false);
   const [navBarBlack, setnavBarBlack] = useState(false);
   const [cartOpen, setcartOpen] = useState(false);
-
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
