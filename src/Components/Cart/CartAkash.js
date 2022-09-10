@@ -124,7 +124,7 @@ export default function CartAkash(props) {
           //   email: profile.data.email,
           // },
           handler: (response) => {
-            props.setIsCartOpen(false)
+            props.setIsCartOpen(false);
             navigate(`/order-placed/${cartType}/${result.data.order.id}`);
           },
         };
@@ -151,9 +151,9 @@ export default function CartAkash(props) {
       <Box
         sx={{
           height: "100%",
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column'
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <div
@@ -161,7 +161,7 @@ export default function CartAkash(props) {
             display: "flex",
             justifyContent: "center",
             position: "relative",
-            width: '100%'
+            width: "100%",
           }}
         >
           <IconButton
@@ -230,13 +230,13 @@ export default function CartAkash(props) {
                   borderBottom: "1px solid lightgray",
                   maxWidth: "300px",
                   width: "100%",
+                  position: "relative",
                 }}
               >
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    position: "relative",
                   }}
                 >
                   <img height={65} src={data.details?.image_url} />
@@ -245,7 +245,7 @@ export default function CartAkash(props) {
                     style={{
                       position: "absolute",
                       top: "-7px",
-                      left: "50px",
+                      right: 0,
                       padding: 0,
                       color: "red",
                     }}
@@ -287,7 +287,7 @@ export default function CartAkash(props) {
           })}
         </div>
 
-        {cartType == 'service' && (
+        {cartType == "service" && (
           <>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="demo-simple-select-standard-label">
@@ -325,7 +325,6 @@ export default function CartAkash(props) {
                 onChange={(event) => setScheduleTime(event.target.value)}
               />
             </div>
-
           </>
         )}
 
