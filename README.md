@@ -16,3 +16,7 @@ You may also see any lint errors in the console.
 
 FE : https://tbss-fe.herokuapp.com/
 BE : https://tbss-be.herokuapp.com/
+
+Test Credentials
+user : abhijeet@gmail.com
+password : 12345678
