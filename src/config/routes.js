@@ -31,10 +31,6 @@ const RoutesArr = () => {
           element: <OrderPlacedRoute />,
         },
         {
-          path: routePaths.myOrders,
-          element: <MyOrderRoute />,
-        },
-        {
           path: routePaths.contactUs,
           element: <ContactUsRoute />,
         },

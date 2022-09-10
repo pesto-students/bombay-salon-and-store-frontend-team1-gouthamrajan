@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import RoutesArr from './config/routes';
+import RoutesArr from "./config/routes";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         newestOnTop={false}
         closeOnClick={true}
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLosss
         draggable
         pauseOnHover
         theme="colored"

@@ -114,7 +114,13 @@ export default function Header(props) {
             </IconButton>
 
             <IconButton
-              onClick={() => props.setIsCartOpen(!props.isCartOpen)}
+              onClick={() => {
+                if (!props.isLoggedIn) {
+                  props.setShowAuth(true);
+                } else {
+                  props.setIsCartOpen(!props.isCartOpen);
+                }
+              }}
               aria-label="cart"
             >
               <StyledBadge badgeContent={props.cartCount} color="secondary">

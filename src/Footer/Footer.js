@@ -1,25 +1,17 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import React from "react";
-import styles from './Footer.module.scss'
+import styles from "./Footer.module.scss";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div
-      className={styles.footer}
-    >
+    <div className={styles.footer}>
       <div
         style={{
-          width: '200px',
-          textAlign: 'center'
+          width: "200px",
+          textAlign: "center",
         }}
       >
         <Typography>
@@ -31,8 +23,8 @@ export default function Footer() {
         <div>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center'
+              display: "flex",
+              justifyContent: "center",
             }}
           >
             <IconButton sx={{ color: "#fff" }}>
@@ -46,33 +38,36 @@ export default function Footer() {
           <div>
             <Button
               style={{
-                backgroundColor: 'white',
-                color: 'black',
-                margin: 6
+                backgroundColor: "white",
+                color: "black",
+                margin: 6,
               }}
             >
               ABOUT US
             </Button>
 
             <Link
-            to="contact-us"
-            >
-            <Button
+              to="contact-us"
               style={{
-                backgroundColor: 'white',
-                color: 'black',
-                margin: 6
+                textDecoration: "none",
               }}
             >
-              CONTACT US
-            </Button>
+              <Button
+                style={{
+                  backgroundColor: "white",
+                  color: "black",
+                  margin: 6,
+                }}
+              >
+                CONTACT US
+              </Button>
             </Link>
 
             <Button
               style={{
-                backgroundColor: 'white',
-                color: 'black',
-                margin: 6
+                backgroundColor: "white",
+                color: "black",
+                margin: 6,
               }}
             >
               FAQ
@@ -83,8 +78,8 @@ export default function Footer() {
 
       <div
         style={{
-          width: '200px',
-          textAlign: 'center'
+          width: "200px",
+          textAlign: "center",
         }}
       >
         <Typography>© 2022 A New You Salon All Rights Reserved.</Typography>
