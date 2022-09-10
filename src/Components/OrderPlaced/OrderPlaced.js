@@ -7,24 +7,25 @@ import { toast } from "react-toastify";
 
 const OrderPlaced = () => {
   const params = useParams();
-  const [isPaymentLoading, setIsPaymentLoading] = useState(true)
+  const [isPaymentLoading, setIsPaymentLoading] = useState(true);
   useEffect(() => {
     if (params.id) {
       const paymentInterval = setInterval(() => {
         axios
           .get(
-            `/app/${params.type == "product" ? "order" : "booking"}/${params.id
+            `/app/${params.type == "product" ? "order" : "booking"}/${
+              params.id
             }`
           )
           .then((response) => {
             console.log(response.data);
             if (response.data.order.payment_status == "paid") {
-              setIsPaymentLoading(false)
-              toast.success('Payment Success')
+              setIsPaymentLoading(false);
+              toast.success("Payment Success");
               clearInterval(paymentInterval);
             }
           });
-      }, 10000);
+      }, 5000);
     }
   }, [params.id]);
 
@@ -34,7 +35,7 @@ const OrderPlaced = () => {
         <div
           style={{
             fontWeight: 600,
-            fontSize: '24px'
+            fontSize: "24px",
           }}
         >
           Thank You
@@ -42,19 +43,16 @@ const OrderPlaced = () => {
 
         {isPaymentLoading && (
           <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            <div>
-              Please wait we are verifying your payment
-            </div>
+            <div>Please wait we are verifying your payment</div>
             <CircularProgress />
           </div>
         )}
-
       </div>
       <div></div>
     </div>

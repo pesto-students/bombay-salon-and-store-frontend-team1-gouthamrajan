@@ -125,7 +125,7 @@ export default function CartAkash(props) {
           // },
           handler: (response) => {
             props.setIsCartOpen(false);
-            navigate(`/order-placed/${cartType}/${result.data.order.id}`);
+            navigate(`/order-placed/${cartType}/${result.data._order.id}`);
           },
         };
 
