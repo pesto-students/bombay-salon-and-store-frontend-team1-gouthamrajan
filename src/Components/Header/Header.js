@@ -6,7 +6,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useOutletContext } from "react-router-dom";
 import Logo from "../../assets/image/tbss.png";
 import PersonIcon from "@mui/icons-material/Person";
-import CartAkash from "../Cart/CartAkash";
+import Cartmain from "../Cart/Cartmain";
 import axios from "../../config/axiosConfig";
 
 export default function Header(props) {
@@ -53,7 +53,7 @@ export default function Header(props) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <CartAkash
+      <Cartmain
         setIsCartOpen={props.setIsCartOpen}
         isCartOpen={props.isCartOpen}
         fetchCart={props.fetchCart}
