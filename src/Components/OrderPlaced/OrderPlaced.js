@@ -19,7 +19,8 @@ const OrderPlaced = () => {
           )
           .then((response) => {
             console.log(response.data);
-            if (response.data.order.payment_status == "paid") {
+            const type = params.type == "product" ? "order" : "booking";
+            if (response.data[type].payment_status == "paid") {
               setIsPaymentLoading(false);
               toast.success("Payment Success");
               clearInterval(paymentInterval);
