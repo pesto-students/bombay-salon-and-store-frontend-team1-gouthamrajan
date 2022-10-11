@@ -1,8 +1,9 @@
 To Getting Started with Create React App
 This project was bootstrapped with Create React App.
 
+![tbss](https://user-images.githubusercontent.com/102403242/195076946-9931d425-e393-4fa8-9bb6-af1d680f435c.jpg)
 
-![tbss](https://user-images.githubusercontent.com/102403242/195076535-0198d7a7-01ac-4f9f-b2b6-071d5d66bba3.jpg)
+
 
 Available Scripts
 In the project directory, you can run:
