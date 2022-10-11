@@ -1,22 +1,46 @@
-To Getting Started with Create React App
-This project was bootstrapped with Create React App.
+#The Bombay Salon & Store
+![tbss](https://user-images.githubusercontent.com/102403242/195076946-9931d425-e393-4fa8-9bb6-af1d680f435c.jpg)
 
-Available Scripts
-In the project directory, you can run:
+The Bombay Salon&Store is grooming & lifestyle website that serves as a one-stop solution for all grooming, needs with pre-booking features.
+No need to wait in long queues at the salon,
+Know the seat availibility pre-hand and most importantly your stylist availibility,
+Get Stylist recommended genuine products suiting your needs
 
-npm run start-dev
-Runs the app in the development mode.
-Open http://localhost:3000 to view it in your browser.
+#Table of Contents
 
-npm start
-build and gets started in production
+1. Demo
+2. Installation
+3. Technology Stack
+4. Authors
+5. License
 
-The page will reload when you make changes.
-You may also see any lint errors in the console.
+#Demo
+[Live Demo](https://tbss-fe.herokuapp.com/).
 
-FE : https://tbss-fe.herokuapp.com/
-BE : https://tbss-be.herokuapp.com/
+Please Note:
 
-Test Credentials
-user : abhijeet@gmail.com
-password : 12345678
+1. We recommend using this app in Google Chrome.
+2. Use the app on Laptop/desktop for better experience.
+
+Test Credentials :
+user : pestoproject@gmail.com
+password : 1111111
+
+#Installation
+
+- Fork or directly clone this repository to your local machine
+- Use the npm install command to install dependencies
+- Once the dependencies are finished installing, use the npm run start-dev command inside the root directory to open the app in your local browser of choice
+
+#Technology Stack
+
+- React JS
+- Material UI
+
+#Authors
+
+- Abhijeet Chandelia
+- Mahesh Gupta
+
+#License
+[MIT](https://opensource.org/licenses/MIT)
