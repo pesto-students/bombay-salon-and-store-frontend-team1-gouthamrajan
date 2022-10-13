@@ -32,8 +32,8 @@ function Login(props) {
   const btnstyle = { margin: "10px 0" };
   const userstyle = { margin: "10px 0" };
   const initialValues = {
-    email: "",
-    password: "",
+    email: "pestoproject@gmail.com",
+    password: "1111111",
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Please enter valid email").required("Required"),
